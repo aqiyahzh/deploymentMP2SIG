@@ -115,7 +115,16 @@ Promise.all([
             const btn = document.createElement("button");
             btn.textContent = i;
             btn.className = (i === page) ? "active" : "";
-            btn.style.cssText = "padding:4px 10px;border-radius:4px;border:1px solid #45a29e;background:" + (i === page ? "#45a29e" : "#1f2833") + ";color:" + (i === page ? "#0b0c10" : "#66fcf1") + ";cursor:pointer;";
+            btn.style.cssText =
+  "padding:6px 14px;" +
+  "border-radius:6px;" +
+  "border:none;" +
+  "margin:0 2px;" +
+  "background:" + (i === page ? "#b08968" : "#e6ccb2") + ";" +
+  "color:" + (i === page ? "#fff" : "#7f5539") + ";" +
+  "font-weight:bold;" +
+  "cursor:pointer;" +
+  "transition:background 0.2s;";
             btn.onclick = () => renderTable(i, document.getElementById("searchInput").value);
             pag.appendChild(btn);
         }
@@ -162,7 +171,7 @@ Promise.all([
             datasets: [{
                 label: "Jumlah Bangunan per Kecamatan",
                 data: Object.values(bangunanPerKecamatan),
-                backgroundColor: "#66fcf1"
+                backgroundColor: "#e0995cff"
             }]
         },
         options: {
@@ -170,8 +179,17 @@ Promise.all([
                 legend: { display: false }
             },
             scales: {
-                x: { ticks: { color: "#f5f5f5" } },
-                y: { ticks: { color: "#f5f5f5" } }
+                x: {
+                    ticks: {
+                        color: "#7f5539",
+                        autoSkip: false,      // <-- Tambahkan ini agar semua label tampil
+                        maxRotation: 40,      // <-- Label miring 40 derajat
+                        minRotation: 40
+                    }
+                },
+                y: {
+                    ticks: { color: "#7f5539" }
+                }
             }
         }
     });
