@@ -1,98 +1,280 @@
-/* === RESET & FONTS === */
-* {
+/* ====== WARNA UTAMA ====== */
+body {
+  background: #f9f6f2;
+  color: #4e342e;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 
-/* === BODY & HEADER === */
-body {
-  background-color: #0b0c10;
-  color: #f5f5f5;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Header (tidak dipakai jika judul di navbar, tapi tetap disediakan jika ingin) */
-header {
-  background: #1f2833;
-  text-align: center;
-  padding: 1rem;
-  color: #66fcf1;
-  font-size: 1.4rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* === NAVBAR MODERN === */
 .navbar {
+  background: #b08968;
+  color: #fff;
+  padding: 18px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1f2833;
-  padding: 0.7rem 2rem;
-  border-bottom: 2px solid #45a29e;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.logo {
-  color: #66fcf1;
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-}
-.menu {
-  display: flex;
-  gap: 1.5rem;
-  list-style: none;
-}
-.menu li a {
-  color: #66fcf1;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.45rem 1.1rem;
-  border-radius: 6px;
-  transition: background 0.2s, color 0.2s;
-  letter-spacing: 0.5px;
-  margin: 0 0.1rem;
-  display: inline-block;
-}
-.menu li a.active, .menu li a:hover {
-  background: #45a29e;
-  color: #0b0c10;
-}
-.menu-toggle {
-  display: none;
-  font-size: 2rem;
-  color: #66fcf1;
-  cursor: pointer;
-  margin-left: 1rem;
+  box-shadow: 0 2px 8px #d7b89933;
 }
 
-/* === RESPONSIVE NAVBAR === */
-@media (max-width: 800px) {
+.logo {
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 1px;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.menu li a.active,
+.menu li a:hover {
+  background: #a47149;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  padding: 32px;
+  background: #f5ede0;
+}
+
+#map {
+  width: 100%;
+  height: 480px;
+  border: 2px solid #d7b899;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px #b0896822;
+}
+
+#dashboard {
+  background: #fff8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #d7b89933;
+  padding: 24px 20px;
+  color: #7f5539;
+}
+
+#dashboard h2, #dashboard h3 {
+  color: #7f5539;
+  margin-top: 0;
+}
+
+#stats p {
+  margin: 8px 0;
+  font-size: 1.05em;
+}
+
+.chart-container {
+  margin: 18px 0 24px 0;
+  background: #f9f6f2;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 18px;
+  margin-top: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.98em;
+}
+
+.legend-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.legend-triangle {
+  background: #ff95aa;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.legend-sungai {
+  background: #67a7f1;
+}
+
+.legend-jalan {
+  background: #817d79;
+}
+
+.legend-kecamatan {
+  background: #7f5539;
+}
+
+#dataTable {
+  background: #fff8f0;
+  margin: 32px auto 0 auto;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #d7b89933;
+  padding: 28px 24px;
+  max-width: 900px;
+}
+
+#dataTable h2 {
+  color: #7f5539;
+}
+
+#dataTable table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  background: #f9f6f2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#dataTable th, #dataTable td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e6ccb2;
+  text-align: left;
+}
+
+#dataTable th {
+  background: #d7b899;
+  color: #fff;
+}
+
+#dataTable tr:last-child td {
+  border-bottom: none;
+}
+
+#pagination button {
+  background: #b08968;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#pagination button.active,
+#pagination button:hover {
+  background: #a47149;
+}
+
+.about-section {
+  background: #f5ede0;
+  padding: 36px 0 48px 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  box-sizing: border-box;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.about-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.about-theme {
+  color: #b08968;
+  font-size: 1.1em;
+  margin-top: 2px;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 28px 32px;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 18px;
+}
+
+.about-card {
+  background: #fff8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px #d7b89922;
+  padding: 22px 18px;
+  min-width: 260px;
+  max-width: 340px;
+  flex: 1 1 260px;
+}
+
+.about-card h3 {
+  color: #7f5539;
+  margin-top: 0;
+}
+
+.about-emoji {
+  font-size: 1.2em;
+  margin-right: 6px;
+}
+
+.about-contact a {
+  color: #b08968;
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+  #map {
+    height: 340px;
+  }
+  #dashboard {
+    padding: 18px 10px;
+  }
+  .about-content {
+    flex-direction: column;
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
-    padding: 0.7rem 1rem;
-  }
-  .logo {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+    padding: 12px 10px;
   }
   .menu {
     flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
+    gap: 8px;
     display: none;
-    margin-top: 0.5rem;
+    width: 100%;
+    margin-top: 8px;
   }
   .menu.show {
     display: flex;
@@ -100,233 +282,10 @@ header {
   .menu-toggle {
     display: block;
   }
-}
-
-/* === GRID UTAMA (LAYOUT DASHBOARD) === */
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  flex: 1;
-  height: 80vh;
-  gap: 2rem;
-  padding: 2rem 2rem 0 2rem;
-}
-
-/* Responsive grid untuk mobile */
-@media (max-width: 900px) {
   .grid-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 1rem;
-  }
-  #dashboard {
-    padding: 1.2rem;
+    padding: 8px;
   }
   #dataTable {
-    padding: 1rem;
-  }
-}
-
-/* === PETA (IFRAME) === */
-#map {
-  width: 100%;
-  height: 100%;
-  border: 3px solid #45a29e;
-  border-radius: 10px;
-}
-
-/* === DASHBOARD SIDEBAR === */
-#dashboard {
-  background: #1f2833;
-  padding: 2rem;
-  overflow-y: auto;
-  border-left: 3px solid #45a29e;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-#dashboard h2,
-#dashboard h3 {
-  margin-bottom: 1rem;
-}
-#stats p {
-  font-size: 1rem;
-  margin: 8px 0;
-}
-.chart-container {
-  background: #0b0c10;
-  border: 1px solid #45a29e;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  margin-top: 0.5rem;
-}
-
-/* === LEGEND GRID (LEGENDA PETA) === */
-.legend-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem 1.5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.legend-icon {
-  display: inline-block;
-  vertical-align: middle;
-}
-.legend-triangle {
-  width: 0; height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 18px solid #fff;
-  border-radius: 2px;
-  border-top: 0;
-  outline: 2px solid #e53935;
-  outline-offset: -2px;
-}
-.legend-sungai {
-  width: 22px; height: 4px;
-  background: #3498db;
-  border-radius: 2px;
-}
-.legend-jalan {
-  width: 22px; height: 4px;
-  background: #888;
-  border-radius: 2px;
-}
-.legend-kecamatan {
-  width: 22px; height: 16px;
-  background: linear-gradient(90deg, #e57373 0%, #fbc02d 50%, #64b5f6 100%);
-  border-radius: 3px;
-  border: 1.5px solid #bbb;
-}
-
-/* === TABEL DATA PERUMAHAN === */
-#dataTable {
-  padding: 2rem 4vw;
-  background: #0b0c10;
-}
-#dataTable h2 {
-  color: #66fcf1;
-  margin-bottom: 18px;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #1f2833;
-  color: #f5f5f5;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-th, td {
-  padding: 14px 18px;
-  border-bottom: 1px solid #45a29e;
-  text-align: left;
-}
-th {
-  background: #45a29e;
-  color: #0b0c10;
-}
-tr:hover {
-  background-color: rgba(102, 252, 241, 0.1);
-}
-
-/* === PAGINATION TABEL === */
-#pagination button.active {
-  font-weight: bold;
-  background: #45a29e !important;
-  color: #0b0c10 !important;
-}
-#pagination button:hover {
-  background: #66fcf1 !important;
-  color: #0b0c10 !important;
-}
-
-/* === ABOUT SECTION (TENTANG WEBSITE) === */
-.about-section {
-  background: #1f2833;
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(30,136,229,0.07);
-  padding: 2.5rem 2rem;
-  margin: 2rem auto 2rem auto;
-  max-width: 800px;
-  color: #f5f5f5;
-}
-.about-header {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-.about-icon {
-  width: 48px;
-  height: 48px;
-  background: #0b0c10;
-  border-radius: 50%;
-  padding: 8px;
-  border: 2px solid #45a29e;
-}
-.about-theme {
-  color: #45a29e;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-top: 0.2rem;
-}
-.about-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-.about-card {
-  background: #0b0c10;
-  border-radius: 10px;
-  border-left: 4px solid #45a29e;
-  padding: 1.2rem 1.2rem 1.2rem 1.5rem;
-  margin-bottom: 0.5rem;
-  box-shadow: 0 1px 6px rgba(30,136,229,0.05);
-}
-.about-card h3 {
-  margin-top: 0;
-  margin-bottom: 0.7rem;
-  color: #66fcf1;
-  font-size: 1.08rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.about-emoji {
-  font-size: 1.2rem;
-}
-.about-card ul {
-  margin: 0 0 0 1.1em;
-  padding: 0;
-  font-size: 0.98rem;
-  line-height: 1.6;
-}
-.about-card.about-contact {
-  grid-column: 1 / -1;
-  background: #16202a;
-  border-left: 4px solid #66fcf1;
-  margin-top: 0.5rem;
-}
-.about-card.about-contact a {
-  color: #45a29e;
-  text-decoration: underline;
-}
-
-/* Responsive about section */
-@media (max-width: 700px) {
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .about-section {
-    padding: 1.2rem 0.5rem;
+    padding: 12px 4px;
   }
 }
