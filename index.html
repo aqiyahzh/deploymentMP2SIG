@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peta Persebaran Kawasan Perumahan Kota Makassar</title>
+  <!-- CSS utama -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- CSS & JS untuk Leaflet (peta interaktif) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Chart.js untuk grafik -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Turf.js untuk analisis spasial -->
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+</head>
+<body>
+
+  <!-- =======================
+       NAVBAR UTAMA WEBSITE
+  ======================== -->
+  <nav class="navbar">
+    <div class="logo">Peta Persebaran Kawasan Perumahan Kota Makassar</div>
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    <ul class="menu">
+      <li><a href="#home" class="active">Beranda</a></li>
+      <li><a href="https://aqiyahzh.github.io/petamentahMP2SIG/#12/-5.1356/119.4588">Peta Full</a></li>
+      <li><a href="#about">Tentang</a></li>
+    </ul>
+  </nav>
+
+  <!-- =======================
+       DASHBOARD & PETA UTAMA
+  ======================== -->
+  <main class="grid-container" id="home">
+    <!-- Peta Interaktif (iframe dari GitHub) -->
+    <iframe
+      id="map"
+      src="https://aqiyahzh.github.io/petamentahMP2SIG/#12/-5.1356/119.4588"
+      allowfullscreen
+      loading="lazy"
+    ></iframe>
+
+    <!-- Sidebar Dashboard Statistik & Legenda -->
+    <aside id="dashboard">
+      <h2>Statistik Umum</h2>
+      <div id="stats">
+        <p><b>Total Kecamatan:</b> <span id="totalKecamatan">-</span></p>
+        <p><b>Total Perumahan:</b> <span id="totalBangunan">-</span></p>
+        <p><b>Total Jalan:</b> <span id="totalJalan">-</span></p>
+        <p><b>Total Sungai:</b> <span id="totalSungai">-</span></p>
+      </div>
+
+      <!-- Grafik Statistik Perumahan per Kecamatan -->
+      <div class="chart-container">
+        <canvas id="chartBangunan"></canvas>
+      </div>
+
+      <!-- Legenda Peta -->
+      <h3>Legenda Peta</h3>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="legend-icon legend-triangle"></span>
+          <span>Kawasan Perumahan</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-icon legend-sungai"></span>
+          <span>Sungai</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-icon legend-jalan"></span>
+          <span>Jalan Utama</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-icon legend-kecamatan"></span>
+          <span>Batas Kecamatan</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- =======================
+       TABEL DATA PERUMAHAN
+  ======================== -->
+  <section id="dataTable">
+    <h2>Data Kawasan Perumahan</h2>
+    <!-- Input pencarian data -->
+    <input type="text" id="searchInput" placeholder="Cari nama perumahan atau kecamatan..." style="margin-bottom:12px;padding:6px 12px;width:100%;max-width:350px;border-radius:6px;border:1px solid #45a29e;">
+    <table>
+      <thead>
+        <tr>
+          <th>Nama Perumahan</th>
+          <th>Kecamatan</th>
+          <th>Keterangan</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <!-- Pagination tabel -->
+    <div id="pagination" style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;"></div>
+  </section>
+
+  <!-- =======================
+       HALAMAN TENTANG WEBSITE
+  ======================== -->
+  <section id="about" class="about-section">
+    <div class="about-header">
+      <!-- Ikon Tentang -->
+      <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="About Icon" class="about-icon">
+      <div>
+        <h2>Tentang Website</h2>
+        <div class="about-theme">WebGIS Persebaran Kawasan Perumahan Kota Makassar</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <!-- Kartu Tujuan -->
+      <div class="about-card">
+        <h3><span class="about-emoji">🎯</span> Tujuan</h3>
+        <ul>
+          <li>Menyediakan informasi spasial & statistik persebaran kawasan perumahan, fasilitas umum, dan infrastruktur di Kota Makassar secara interaktif.</li>
+          <li>Memudahkan masyarakat, pengembang, dan pemerintah dalam mengakses data perumahan untuk perencanaan, pengawasan, dan pengambilan keputusan.</li>
+          <li>Mendukung transparansi dan keterbukaan data tata ruang serta pembangunan wilayah perkotaan.</li>
+          <li>Meningkatkan literasi geospasial masyarakat melalui visualisasi data berbasis peta digital.</li>
+        </ul>
+      </div>
+      <!-- Kartu Fitur -->
+      <div class="about-card">
+        <h3><span class="about-emoji">✨</span> Fitur Utama</h3>
+        <ul>
+          <li>Peta interaktif kawasan perumahan, sungai, jalan, dan batas kecamatan di Kota Makassar.</li>
+          <li>Statistik jumlah kawasan perumahan per kecamatan dalam bentuk grafik.</li>
+          <li>Tabel data kawasan perumahan yang dapat dicari dan dipilah dengan mudah.</li>
+          <li>Fitur pencarian dan pagination pada data perumahan.</li>
+          <li>Legenda peta yang jelas dan mudah dipahami.</li>
+          <li>Desain responsif, dapat diakses dari perangkat desktop maupun mobile.</li>
+        </ul>
+      </div>
+      <!-- Kartu Manfaat -->
+      <div class="about-card">
+        <h3><span class="about-emoji">💡</span> Manfaat</h3>
+        <ul>
+          <li>Mempermudah identifikasi lokasi dan sebaran kawasan perumahan di Kota Makassar.</li>
+          <li>Mendukung proses perencanaan pembangunan, pengawasan, dan evaluasi tata ruang kota.</li>
+          <li>Menjadi sumber referensi bagi masyarakat, akademisi, dan pemangku kepentingan terkait data spasial perumahan.</li>
+          <li>Meningkatkan partisipasi publik dalam pengawasan pembangunan kawasan perumahan.</li>
+        </ul>
+      </div>
+      <!-- Kartu Teknologi -->
+      <div class="about-card">
+        <h3><span class="about-emoji">🛠️</span> Teknologi & Pengembangan</h3>
+        <ul>
+          <li>Dikembangkan menggunakan <b>QGIS</b> untuk pengolahan data spasial.</li>
+          <li><b>Leaflet</b> untuk peta interaktif.</li>
+          <li><b>Chart.js</b> untuk visualisasi statistik.</li>
+          <li>Data bersumber dari hasil digitasi dan open data, serta dapat diperbarui secara berkala.</li>
+        </ul>
+      </div>
+      <!-- Kartu Kontak -->
+      <div class="about-card about-contact">
+        <h3><span class="about-emoji">📬</span> Kontak & Saran</h3>
+        <p>
+          Jika Anda memiliki saran, pertanyaan, atau ingin berkolaborasi, silakan hubungi melalui
+          <a href="https://instagram.com/aqiyahzh" target="_blank">Instagram</a>
+          atau 
+          <a href="mailto:aqiyahzulqiya@gmail.com" target="_blank">email pengelola.</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+       SCRIPT UTAMA
+  ======================== -->
+  <script src="main.js"></script>
+  <script>
+    // Toggle menu untuk mobile
+    function toggleMenu() {
+      document.querySelector('.menu').classList.toggle('show');
+    }
+    // Highlight menu aktif saat klik
+    document.querySelectorAll('.menu li a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.menu li a').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
